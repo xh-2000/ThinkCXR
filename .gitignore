@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.safetensors
+*.pt
+*.pth
+*.bin
+*.jpg
+*.jpeg
+*.png
+*.zip
+data/
+outputs/
+predictions/
