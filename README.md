@@ -86,7 +86,6 @@ CUDA_VISIBLE_DEVICES=0 \
 bash scripts/train_lora.sh
 ```
 
-The default configuration follows the reported ThinkCXR setup: three SFT epochs, learning rate `5e-5`, per-device batch size 1, gradient accumulation over 8 steps, a cosine scheduler, BF16, LoRA rank 8, LoRA alpha 16, zero LoRA dropout, an 8,192-token cutoff, 16 preprocessing workers, and seed 42. The adapters target the language-model attention and MLP projection layers.
 
 ## Batch Inference
 
@@ -108,15 +107,8 @@ python scripts/evaluate_reports.py \
   --prediction /path/to/predictions/generated_predictions.jsonl
 ```
 
-The prediction JSONL must contain `label` and `predict` fields. The evaluator reports ROUGE-1, ROUGE-2, ROUGE-L, BLEU-1, BLEU-2, and BLEU-4 separately for Findings and Impression. Parsing failures are excluded from the corresponding field-level mean and reported as valid/invalid sample counts. The generated CoT is not scored as a report section.
+The prediction JSONL must contain `label` and `predict` fields. The evaluator reports ROUGE-1, ROUGE-2, ROUGE-L, BLEU-1, BLEU-2, and BLEU-4 separately for Findings and Impression.
 
-## Reproducibility Notes
-
-- Fix the random seed and record the exact base-model revision.
-- Report whether each split is study-level and patient-disjoint.
-- Keep the inference prompt identical to the training prompt.
-- Do not include prior radiographs, lateral views, or Findings as inference inputs when evaluating an image-only model.
-- For confidence intervals, use paired or patient-clustered bootstrap resampling when repeated studies from the same patient are present.
 
 ## License And Data Access
 
